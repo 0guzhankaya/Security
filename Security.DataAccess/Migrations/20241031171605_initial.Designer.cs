@@ -12,7 +12,7 @@ using Security.DataAccess;
 namespace Security.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241031141120_initial")]
+    [Migration("20241031171605_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -195,7 +195,6 @@ namespace Security.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
