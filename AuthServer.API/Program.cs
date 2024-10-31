@@ -1,10 +1,12 @@
 using Microsoft.Extensions.DependencyInjection;
+using Security.Core.Configuration;
 using Shared.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Custom Token configuration.
 builder.Services.Configure<CustomTokenOptions>(builder.Configuration.GetSection("TokenOptions"));
+builder.Services.Configure<Client>(builder.Configuration.GetSection("Clients"));
 
 // Add services to the container.
 
