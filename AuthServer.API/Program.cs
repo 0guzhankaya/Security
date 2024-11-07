@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using Security.DataAccess;
 using Security.DataAccess.Repositories;
 using Security.Service.Services;
 using Shared.Configuration;
+using Shared.Extensions;
 using Shared.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -64,12 +66,22 @@ builder.Services.AddAuthentication(options =>
 });
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation(options =>
+{
+	options.RegisterValidatorsFromAssemblyContaining<Program>();
+});
+
+// Custom validation comes from shared layer.
+builder.Services.UseCustomValidationResponse();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+// Custom Exception Middleware which have Run() method.
+app.UseCustomException();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
