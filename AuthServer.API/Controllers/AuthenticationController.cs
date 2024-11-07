@@ -35,7 +35,7 @@ namespace AuthServer.API.Controllers
 		[HttpPost]
 		public async Task<IActionResult> RevokeRefreshToken(RefreshTokenDto refreshTokenDto)
 		{
-			var result = await _authenticationService.CreateTokenByRefreshToken(refreshTokenDto.RefreshToken);
+			var result = await _authenticationService.RevokeRefreshToken(refreshTokenDto.RefreshToken);
 			return ActionResultInstance(result);
 		}
 
