@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Security.Service.Services
+namespace Shared.Services
 {
 	public static class SignService
 	{

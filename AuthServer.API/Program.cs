@@ -11,6 +11,7 @@ using Security.DataAccess;
 using Security.DataAccess.Repositories;
 using Security.Service.Services;
 using Shared.Configuration;
+using Shared.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
