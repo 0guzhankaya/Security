@@ -1,6 +1,8 @@
 using Shared.Configuration;
 using System.Configuration;
 using Shared.Extensions;
+using MiniApp1.API.Requirements;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,11 +15,18 @@ var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<CustomTo
 // TokenOptions'u doðrudan Configuration üzerinden alarak Auth iþlemi eklenir
 builder.Services.AddCustomTokenAuth(builder);
 
+// Handler is defined.
+builder.Services.AddSingleton<IAuthorizationHandler, BirthDayRequirementHandler>();
+
 builder.Services.AddAuthorization(options =>
 {
 	options.AddPolicy("AnkaraPolicy", policy =>
 	{
 		policy.RequireClaim("city", "Ankara");
+	});
+	options.AddPolicy("AgePolicy", policy =>
+	{
+		policy.Requirements.Add(new BirthDayRequirement(18));
 	});
 });
 

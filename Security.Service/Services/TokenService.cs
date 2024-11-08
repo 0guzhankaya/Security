@@ -54,6 +54,7 @@ namespace Security.Service.Services
 				new Claim(ClaimTypes.Name, userApp.UserName),
 				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
 				new Claim("city", userApp.City), // token'ın payload'ına city bilgisi eklendi.
+				new Claim("birth-date", userApp.BirthDate.ToShortDateString()) // token'ın payload'ına birthDate bilgisi eklendi.
 			};
 
 			userList.AddRange(audiences.Select(x => new Claim(JwtRegisteredClaimNames.Aud, x)));
