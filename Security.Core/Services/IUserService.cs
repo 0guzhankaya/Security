@@ -1,4 +1,5 @@
-﻿using Security.Core.Dtos;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Security.Core.Dtos;
 using Shared.Dtos;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,6 @@ namespace Security.Core.Services
 	{
 		Task<Response<UserAppDto>> CreateUserAsync(CreateUserDto createUserDto);
 		Task<Response<UserAppDto>> GetUserByNameAsync(string userName);
+		Task<Response<NoContent>> CreateUserRoles(string userName);
 	}
 }
